@@ -1,0 +1,378 @@
+/* css/giaoDien.css */
+
+:root {
+    --primary: #ff5e7e;
+    --secondary: #ff99ac;
+    --accent: #ffeb3b;
+    --text: #2d3436;
+    --bg-gradient: linear-gradient(120deg, #fff5f7, #fce4ec, #f3e5f5, #fff5f7);
+}
+
+/* 1. Reset & Cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: bgChange 15s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes bgChange {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. Hiệu ứng Trái tim rơi nền */
+body::before, body::after {
+    content: "❤";
+    position: fixed;
+    top: -10%;
+    color: var(--secondary);
+    opacity: 0.3;
+    font-size: 20px;
+    z-index: 0;
+    pointer-events: none;
+    animation: heartFall 8s linear infinite;
+}
+
+body::before { left: 10%; }
+body::after { left: 85%; font-size: 14px; animation-duration: 12s; animation-delay: 3s; }
+
+@keyframes heartFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* 3. Tiêu đề - Nhịp điệu lãng mạn */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0 20px;
+    z-index: 1;
+}
+
+header h1 {
+    font-size: 26px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-shadow: 2px 2px 0px white;
+    display: inline-block;
+    animation: swing 2s ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+    0% { transform: rotate(2deg) scale(1); }
+    100% { transform: rotate(-2deg) scale(1.05); }
+}
+
+/* 4. Khung nội dung chính (Glassmorphism) */
+div {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 30px 25px;
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(255, 94, 126, 0.15);
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 5. Hai khối thông tin - Viền gạch đứt & Nền đổi màu */
+#thongTinBan, #thongTinNguoiAy {
+    padding: 25px 20px 15px;
+    border-radius: 25px;
+    border: 2.5px dashed var(--secondary);
+    background: #fffcfd;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: innerBgChange 6s infinite alternate;
+}
+
+@keyframes innerBgChange {
+    from { background-color: #ffffff; }
+    to { background-color: #fff2f5; }
+}
+
+#thongTinBan:focus-within, #thongTinNguoiAy:focus-within {
+    border-style: solid;
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 94, 126, 0.1);
+}
+
+/* 6. Label Hết Phèn (Có Icon & Animation) */
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+label[for="tenBan"]::before, label[for="tenNguoiAy"]::before { content: "👤"; }
+label[for="nsBan"]::before, label[for="nsNguoiAy"]::before { content: "📅"; }
+
+#thongTinBan:focus-within label, #thongTinNguoiAy:focus-within label {
+    transform: translateX(8px);
+    filter: brightness(0.8);
+}
+
+/* 7. Input Hiện Đại */
+input[type="text"], 
+input[type="date"] {
+    width: 100%;
+    height: 55px;
+    border: 2px solid #f1f2f6;
+    border-radius: 18px;
+    padding: 0 18px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    background: white;
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #fff;
+}
+
+/* 8. Nút Bấm Lấp Lánh & Nhịp Đập */
+#row {
+    margin-top: 5px;
+}
+
+input[type="button"] {
+    width: 100%;
+    height: 65px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    border-radius: 22px;
+    font-size: 19px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 94, 126, 0.4);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite, shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 10px 20px rgba(255, 94, 126, 0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 15px 30px rgba(255, 94, 126, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 10px 20px rgba(255, 94, 126, 0.4); }
+}
+
+input[type="button"]:active {
+    transform: scale(0.94);
+    filter: brightness(1.2);
+}
+
+/* 9. Tối ưu Mobile nhỏ */
+@media (max-width: 375px) {
+    div { padding: 20px; }
+    header h1 { font-size: 22px; }
+    input[type="button"] { font-size: 17px; height: 60px; }
+}
+/* Căn chỉnh các ô trong group Ngày-Tháng-Năm */
+#ntnI, #ntny {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép rớt dòng trên màn hình cực nhỏ */
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Label bên trong group ntn chiếm toàn bộ chiều rộng hàng đầu */
+#ntnI label, #ntny label {
+    flex: 0 0 100%; 
+}
+
+/* Định dạng cho các input số và select */
+#ntnI input, #ntnI select, 
+#ntny input, #ntny select {
+    flex: 1; /* Chia đều độ rộng cho các ô */
+    min-width: 0; /* Tránh bị tràn khung trên mobile */
+    height: 45px;
+    border-radius: 12px;
+    border: 2px solid #f1f2f6;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+/* Cho ô năm rộng hơn một chút để cân đối */
+#namSinhBan, #namSinhNguoiAy {
+    flex: 1.5 !important;
+}
+
+/* Hiệu ứng khi focus vào các ô nhỏ */
+#ntnI input:focus, #ntnI select:focus,
+#ntny input:focus, #ntny select:focus {
+    border-color: var(--primary);
+    background: #fff;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(255, 94, 126, 0.1);
+}
+/* Tút lại vẻ đẹp cho thẻ Select */
+select {
+    appearance: none; /* Xóa bỏ giao diện mặc định của trình duyệt */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ff5e7e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Đặt icon mũi tên bên phải */
+    padding-right: 30px !important; /* Tránh chữ đè lên mũi tên */
+    cursor: pointer;
+    color: var(--text) !important; /* Đảm bảo màu chữ luôn rõ ràng */
+    background-color: white !important;
+}
+
+/* Khi đã chọn giá trị (không còn là placeholder) */
+select:not([value=""]) {
+    color: var(--primary) !important; /* Đổi màu chữ tháng đã chọn cho nổi bật */
+    font-weight: 800;
+}
+
+/* Làm đẹp danh sách lựa chọn bên trong (Dropdown) */
+select option {
+    color: var(--text);
+    background-color: white;
+    padding: 10px;
+}
+.gender-select1 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.gender-select1 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+/* Ẩn cái nút tròn mặc định đi */
+.gender-select1 input[type="radio"] {
+    display: none;
+}
+
+/* Tạo giao diện mới cho nhãn (label) */
+.gender-select1 label {
+    padding: 10px 25px;
+    border: 2px solid #ffebef;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+    color: #636e72;
+    font-weight: bold;
+}
+
+/* Khi được chọn thì đổi màu hồng */
+.gender-select1 input[type="radio"]:checked + label {
+    background: #ff5e7e;
+    color: white;
+    border-color: #ff5e7e;
+    box-shadow: 0 5px 15px rgba(255, 94, 126, 0.3);
+}
+
+.gender-select1 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.gender-select1 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+/* Đây là cái div trắng bao quanh mọi thứ */
+.result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Căn giữa tất cả con theo chiều ngang */
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;       /* Giới hạn độ rộng để không bị bè */
+    margin: 0 auto;         /* Căn giữa chính cái card này */
+    padding: 20px;
+}
+.score-container {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center;    /* Căn giữa dọc */
+}
+
+.score-number {
+    /* XÓA position: absolute, top, left, transform... */
+    font-size: 5rem; 
+    font-weight: 900;
+    color: var(--primary);
+    text-shadow: 4px 4px 0px rgba(255, 94, 126, 0.1);
+    animation: heartBeat 1.5s infinite;
+    
+    /* Đảm bảo nó là thành phần bình thường để Flexbox căn giữa được */
+    display: inline-block; 
+    margin: 0;
+}
+
+/* Hiệu ứng nhịp đập giống như trái tim */
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.1); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}

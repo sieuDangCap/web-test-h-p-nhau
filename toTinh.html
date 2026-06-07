@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tỏ Tình</title>
+    <link rel="stylesheet" href="css/nhapTextToTinh.css">
+    <link rel="icon" type="image/png" href="Gemini_Generated_Image_dvvwwqdvvwwqdvvw.png" sizes="32x32">
+</head>
+<body>
+
+<header>
+    <h1>TỎ TÌNH 💌</h1>
+</header>
+
+<div class="love-card">
+    <p class="title">
+        Gửi lời nhắn đến <span id="nameTarget">người ấy</span>
+    </p>
+
+    <textarea id="loveText" placeholder="Nhập lời tỏ tình của bạn ở đây..."></textarea>
+
+    <div class="actions">
+        <button onclick="guiLoiToTinh()">GỬI 💖</button>
+        <button class="back" onclick="history.back()">QUAY LẠI</button>
+    </div>
+</div>
+
+<script>
+    const urlData = new URLSearchParams(window.location.search);
+    const n2 = urlData.get('n2');
+    const n1= urlData.get('n1');
+    const score =urlData.get('score');
+
+    document.getElementById("nameTarget").innerText = n2;  // thay đổi cái title
+
+    function guiLoiToTinh(){
+        const text=document.getElementById("loveText").value.trim();
+        const n2 = urlData.get('n2');
+        const n1=urlData.get('n1');
+        const score=urlData.get('score');
+        const maHoaText=btoa(unescape(encodeURIComponent(text)));
+        const maHoaN2=btoa(unescape(encodeURIComponent(n2)));
+        const maHoaN1=btoa(unescape(encodeURIComponent(n1)));
+        const maHoaScore=btoa(unescape(encodeURIComponent(score)));
+        const linkKetQua=`noiDungToTinh.html?msg=${maHoaText}&n2=${maHoaN2}&n1=${maHoaN1}&score=${maHoaScore}`;
+
+        if(text === ""){
+            alert("Nhập gì đó đi bro 😅");
+            return;
+        }
+
+        // chuyển sang kq
+        window.location.href = linkKetQua;
+    }
+</script>
+<script src="https://pl29181831.effectivecpmnetwork.com/ba/d3/57/bad357a18ac2ef635166a7d70b8bf7e3.js"></script>
+
+
+
+</body>
+</html>

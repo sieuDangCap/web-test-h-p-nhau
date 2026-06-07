@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/giaoDien.css">
+    <title>Kết quả</title>
+    <link rel="icon" type="image/png" href="Gemini_Generated_Image_dvvwwqdvvwwqdvvw.png" sizes="32x32">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* 1. Căn giữa toàn bộ card kết quả */
+        .result-card { 
+            text-align: center; 
+            padding: 30px;
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .names-display { 
+            font-size: 1.4rem; 
+            margin-bottom: 20px; 
+            color: #2d3436; 
+            font-weight: bold; 
+        }
+
+        .score-container {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score-number { 
+            
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            color: #ff5e7e;
+            text-shadow: 3px 3px 0px rgba(255, 94, 126, 0.1);
+            animation: heartBeat 1.5s infinite;
+        }
+
+        .msg-text { 
+            font-style: italic; 
+            color: #636e72; 
+            line-height: 1.6; 
+            min-height: 60px;
+            padding: 0 10px;
+        }
+
+        /* 3. Hiệu ứng nhịp đập cho con số */
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        input[type="button"] {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            background: #ff5e7e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        input[type="button"]:hover { transform: scale(1.05); background: #ff476d; }
+    </style>
+</head>
+<body>
+    <header style="text-align: center; margin-top: 20px;"><h1>KẾT QUẢ</h1></header>
+    
+    <div class="result-card">
+        <p class="names-display">
+            <span id="txtN1">...</span> ❤️ <span id="txtN2">...</span>
+        </p>
+        
+        <div class="score-container">
+            <div id="displayScore" class="score-number">0%</div>
+        </div>
+
+        <p class="msg-text" id="displayMsg">Đang phân tích...</p>
+        <br>
+        <input type="button" value="THỬ LẠI" onclick="window.location.href='index.html'" id="nutToTinh">
+    </div>
+    <script>
+        const urlData = new URLSearchParams(window.location.search);
+        const n1 = urlData.get('n1') || "Bạn";
+        const n2 = urlData.get('n2') || "Người ấy";
+        const score = parseInt(urlData.get('score')) || 0;
+
+
+        function suly(score){
+            score=parseInt(score);
+            if(score>=70){
+                let giaTriNutToTinh=document.getElementById("nutToTinh");
+                giaTriNutToTinh.value="Tỏ Tình";
+                giaTriNutToTinh.setAttribute("onclick",`window.location.href='toTinh.html?n1=${n1}&n2=${n2}&score=${score}';`);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        suly(score);
+
+        document.getElementById('txtN1').innerText = n1;
+        document.getElementById('txtN2').innerText = n2;
+
+        setTimeout(() => {
+            let current = 0;
+            if (score === 0) {
+                document.getElementById('displayScore').innerText = "0%";
+                showFinalEffects(0);
+                return;
+            }
+
+            const timer = setInterval(() => {
+                if (current >= score) {
+                    clearInterval(timer);
+                    showFinalEffects(score);
+                } else {
+                    current++;
+                    document.getElementById('displayScore').innerText = current + "%";
+                }
+            }, 20);
+        }, 500);
+
+        function showFinalEffects(s) {
+            const msg = document.getElementById('displayMsg');
+            if (s >= 94) {
+                msg.innerText = "Trời sinh một cặp! Hai bạn sinh ra là để dành cho nhau.";
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff5e7e', '#ffeb3b'] });
+            } else if (s >= 90) {
+                msg.innerText = "Có lẽ các bạn là cặp bài trùng";
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff5e7e', '#ffeb3b'] });
+            } else if(s>=80) {
+                msg.innerText = "Tâm đầu ý hợp. Hai bạn chính là tri kỷ của cuộc đời nhau.";
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff5e7e', '#ffeb3b'] });
+            }
+            else if(s>=75){
+                msg.innerText ="Rất hợp nhau! Hai bạn sinh ra để bù đắp những khuyết điểm của nhau";
+            }
+            else if(s>=70){
+                msg.innerText ="Có một chút tiềm năng đó!";
+            }
+            else if(s>=50){
+                msg.innerText ="Mức độ an toàn. Đủ để làm bạn, nhưng làm người yêu thì cần nỗ lực.";
+            }
+            else if(s>=40){
+                msg.innerText ="Hơi khó một chút";
+            }
+            else{
+                msg.innerText ="Có lẽ Bro nên suy nghĩ lại :((";
+            }
+        }
+    </script>
+    <script src="https://pl29181831.effectivecpmnetwork.com/ba/d3/57/bad357a18ac2ef635166a7d70b8bf7e3.js"></script>
+
+
+
+
+</body>
+</html>
