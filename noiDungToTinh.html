@@ -168,7 +168,7 @@
         // mã hoá 
         function decodeBase64(str) {
             try {
-                return decodeURIComponent(escape(atob(str)));
+                return decodeURIComponent(escape(atob(str.replace(/ /g,'+')))); // sửa lỗi ko hiện được text có dấu
             } catch (e) {
                 return "...";
             }
