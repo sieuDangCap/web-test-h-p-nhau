@@ -1,173 +1,134 @@
-/* Import font chữ mượt mà & hiện đại */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
-:root {
-  --primary-color: #ff4b72;
-  --primary-hover: #e0395f;
-  --secondary-color: #ff85a2;
-  --bg-gradient: linear-gradient(135deg, #ffe6eb 0%, #ffc3d0 100%);
-  --text-color: #4a2c35;
-  --shadow-color: rgba(255, 75, 114, 0.15);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffdde1;
+    background-image: linear-gradient(180deg, #ffdde1 0%, #ee9ca7 100%);
+    color: #333;
+    margin: 0;
+    padding: 20px 10px;
+    text-align: center;
+    min-height: 100vh;
 }
 
-/* Tiêu đề trang */
 header h1 {
-  color: var(--primary-color);
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    color: #d81b60;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* Form nhập thông tin: Gom gọn gàng, có nền trắng mờ và bo tròn đẹp mắt */
+/* Khung Form trung tâm */
 form {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px var(--shadow-color);
-  width: 100%;
-  max-width: 480px;
-  padding: 25px 20px;
-  margin-bottom: 20px;
+    background: #ffffff;
+    display: inline-block;
+    text-align: left;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(216, 27, 96, 0.15);
+    margin-bottom: 25px;
+    border: 1px solid #f8bbd0;
 }
 
-/* Các khối thông tin cá nhân */
+/* Đóng khung từng nhóm thông tin */
 #thongTinBan, #thongTinNguoiAy {
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px dashed #ffe0e8;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #f48fb1;
 }
 
-/* Nhãn (Label) chỉ áp dụng trong form */
-form label {
-  font-weight: 700;
-  display: block;
-  text-align: left;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  color: var(--primary-color);
-  font-size: 0.95rem;
+label {
+    display: block;
+    font-weight: 600;
+    color: #c2185b;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    text-transform: capitalize;
 }
 
-/* Ô nhập text, number và select trong form */
-form input[type="text"], 
-form input[type="number"], 
-form select {
-  width: 100%;
-  padding: 10px 14px;
-  margin-bottom: 10px;
-  border: 2px solid #ffd0dc;
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: var(--text-color);
-  background-color: #fff;
-  outline: none;
-  transition: all 0.3s ease;
+/* Ô nhập tên và số */
+input[type="text"], 
+input[type="number"], 
+select {
+    padding: 8px 12px;
+    border: 1px solid #f48fb1;
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-form input[type="text"]:focus, 
-form input[type="number"]:focus, 
-form select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 6px rgba(255, 75, 114, 0.2);
+input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-/* Nhóm chọn ngày sinh (ntnI, ntny) */
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+select:focus {
+    border-color: #d81b60;
+    box-shadow: 0 0 5px rgba(216, 27, 96, 0.3);
+}
+
+/* Dòng nhập ngày tháng năm sinh */
 #ntnI, #ntny {
-  display: flex;
-  gap: 8px;
+    margin-bottom: 10px;
+    white-space: nowrap;
 }
 
-#ntnI input, #ntnI select, #ntny input, #ntny select {
-  flex: 1;
+#ntnI input[type="number"], 
+#ntny input[type="number"] {
+    width: 75px;
 }
 
-/* Chọn giới tính (gender-select1) */
+#ntnI select, 
+#ntny select {
+    width: 100px;
+}
+
+/* Chọn giới tính */
 .gender-select1 {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 8px;
-}
-
-.gender-select1 input[type="radio"] {
-  margin-right: -10px;
-  accent-color: var(--primary-color);
+    margin-top: 8px;
 }
 
 .gender-select1 label {
-  display: inline !important;
-  margin: 0 !important;
-  font-weight: 600 !important;
-  color: var(--text-color) !important;
-  cursor: pointer;
+    display: inline-block;
+    margin-right: 15px;
+    color: #444;
+    font-weight: normal;
+    cursor: pointer;
 }
 
-/* Nút Tính Toán */
+.gender-select1 input[type="radio"] {
+    accent-color: #d81b60;
+    cursor: pointer;
+}
+
+/* Nút bấm tính toán */
 #row {
-  text-align: center;
-  margin-top: 15px;
+    text-align: center;
+    margin-top: 15px;
 }
 
-form input[type="button"] {
-  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  color: #ffffff;
-  border: none;
-  padding: 12px 32px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px var(--shadow-color);
-  transition: all 0.25s ease;
-  width: 100%;
+input[type="button"] {
+    background-color: #d81b60;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(216, 27, 96, 0.3);
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-form input[type="button"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 75, 114, 0.35);
-  background: linear-gradient(45deg, var(--primary-hover), var(--primary-color));
+input[type="button"]:hover {
+    background-color: #ad1457;
+    transform: translateY(-1px);
 }
 
-form input[type="button"]:active {
-  transform: translateY(1px);
-}
-
-/* Đảm bảo khu vực quảng cáo bên dưới form hiển thị chuẩn xác */
-body > a, 
-body > script, 
-body > div:not(form) {
-  max-width: 100%;
-  text-align: center;
-  margin: 10px auto;
-}
-
-/* Tối ưu hiển thị trên điện thoại di động */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-  
-  form {
-    padding: 15px 12px;
-  }
+input[type="button"]:active {
+    transform: translateY(1px);
 }
